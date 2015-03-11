@@ -22,7 +22,7 @@ function initialize() {
   });
 
   // Load a GeoJSON from the same server as our demo.
-  map.data.loadGeoJson('https://github.com/Jdharden123/HChronProjects/blob/master/Denton_Accidents.geojson');
+  map.data.addGeoJson('https://github.com/Jdharden123/HChronProjects/blob/master/Denton_Accidents.geojson');
 }
 
 google.maps.event.addDomListener(window, 'load', initialize);
