@@ -22,7 +22,7 @@ function initialize() {
   });
 
   // Load a GeoJSON from the same server as our demo.
- map.data.addGeoJson('Denton_Accidents.geojson,');
+ map.data.addGeoJson('http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson,');
 }
 
 google.maps.event.addDomListener(window, 'load', initialize);
