@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <style>
+    #map-canvas { width:100%; height:650px; background-color: WhiteSmoke;}
+
+
+#msg {
+  position: absolute;
+  font-size: 30px;
+  font-family: sans-serif;
+  text-shadow: 0.1em 0.1em 0.2em black;
+  color: black;
+  top: 200px;
+  width: 100%;
+  text-align: left;
+}
+
+#header {
+    background-color: WhiteSmoke;
+    color:white;
+    text-align:left;
+        
+}
+
+       
+  </style>
+  
+  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+  <script type="text/javascript">
+  
+  
+
+var unlock = false;
+  
+    var map, timer;
+    var layer_0;
+    function initialize() {
+      map = new google.maps.Map(document.getElementById('map-canvas'), {
+        center: new google.maps.LatLng(29.918027756811693, -95.28351416406247),
+        zoom: 6,
+        minZoom: 3,
+        maxZoom: 6,
+        scrollwheel: false,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      });
+  
+      var style = [
+        {
+    "featureType": "water",
+    "stylers": [
+      { "lightness": 63 }
+    ]
+  },{
+    "featureType": "road",
+    "stylers": [
+      { "visibility": "off" }
+    ]
+  },{
+    "featureType": "landscape",
+    "stylers": [
+      { "visibility": "on" },
+      { "lightness": 100 }
+    ]
+  },{
+    "featureType": "poi",
+    "stylers": [
+      { "visibility": "off" }
+    ]
+  },{
+    "featureType": "administrative",
+    "stylers": [
+      { "visibility": "off" }
+          ]
+        }
+      ];
+      var styledMapType = new google.maps.StyledMapType(style, {
+        map: map,
+        name: 'Styled Map'
+      });
+      map.mapTypes.set('map-style', styledMapType);
+      map.setMapTypeId('map-style');
+      
+      map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(
+  document.getElementById('legend'));  
+    
+ map.data.setStyle({
+    fillColor: 'white',
+    strokeWeight: 1,
+    fillOpacity: 0,
+    strokeColor: 'white'    
+               });
+        
+   map.data.addListener('mouseover', function(event) {
+    map.data.revertStyle();
+    map.data.overrideStyle(event.feature, {strokeWeight: 5});
+    map.data.overrideStyle(event.feature, {strokeColor: 'white'});
+    map.data.overrideStyle(event.feature, {fillOpacity: 0});
+      });
+
+  map.data.addListener('mouseout', function(event) {
+    map.data.revertStyle();
+        
+ 
+  });
+       
+    var lineSymbol = {
+    path: google.maps.SymbolPath.CIRCLE,
+    scale: 8,
+    strokeColor: 'black'
+  };
+  
+  var planeSymbol = {
+ 
+    path: 'M362.985,430.724l-10.248,51.234l62.332,57.969l-3.293,26.145 l-71.345-23.599l-2.001,13.069l-2.057-13.529l-71.278,22.928l-5.762-23.984l64.097-59.271l-8.913-51.359l0.858-114.43 l-21.945-11.338l-189.358,88.76l-1.18-32.262l213.344-180.08l0.875-107.436l7.973-32.005l7.642-12.054l7.377-3.958l9.238,3.65 l6.367,14.925l7.369,30.363v106.375l211.592,182.082l-1.496,32.247l-188.479-90.61l-21.616,10.087l-0.094,115.684',
+    scale: .015, 
+    strokeOpacity: 1,
+    color: 'white',
+    strokeWeight: 1,
+    fillColor: 'black,' 
+    
+  };
+    
+  // Create the polyline and add the symbol to it via the 'icons' property.
+
+  var a = new google.maps.Polyline({
+    path: [{lat: 29.645419, lng: -95.278889}, {lat: 35.0402222,  lng: -106.6091944}],
+    geodesic: true,
+      strokeWeight: '0',
+      strokeColor: 'orange',
+      icons: [{
+      icon: planeSymbol,
+      offset: '0',
+      repeat: '50%'
+    }],
+    map: map
+  });
+  animatePlane(a);
+
+    }
+    
+
+function animatePlane(line) {
+    var count = 2;
+    window.setInterval(function() {
+      count = (count + 1) % 5000;
+
+      var icons = line.get('icons');
+      icons[0].offset = (count / 20) + '%';
+      line.set('icons', icons);
+  }, 10);
+  
+  }
+       
+  google.maps.event.addDomListener(window, 'load', initialize);
+  
+  </script>
+  </head>
+  <body>
+  <div id="header"> 
+  </div>
+
+  <div id="map-canvas"></div>
+  <a href="https://twitter.com/Jdharden" class="twitter-follow-button" data-show-count="false">Follow @Jdharden</a   
+</body>
+</html>
