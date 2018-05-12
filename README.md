@@ -1,1 +1,1 @@
-# HChronProjects
+# Houston Chronicle Projects
