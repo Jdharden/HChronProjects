@@ -6,8 +6,23 @@
 #######################################################################################################################################
 
 library (tidyverse)
+library (ggplot2)
+library (tidyr)
+library (dplyr)
+library (readr) 
 
 setwd("~/Documents/Harvey911")
+HarveyData <- read.csv ("R function.csv", stringsAsFactors=FALSE, na.strings="#VALUE!", header = TRUE)
+
+head(HarveyData)
+summary(HarveyData)
+str(HarveyData)
+
+##Find the average time it took to close calls 
+
+ggplot(HarveyData, aes(y = Hours, x = Disp_date)) + 
+stat_summary(fun.y="mean", geom="bar")
+
 
 911 call anaylsis <- function () {
 read.csv ("Harvey.csv", header=TRUE)
