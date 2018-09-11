@@ -1,6 +1,4 @@
 #Data Projects and Applications
-
-<br />
 <br />
 <span style="color: #999999; font-size: large;">James Harden Shot Analysis</span><br />
 <br />
